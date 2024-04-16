@@ -15,10 +15,13 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        Trip.generateTripList();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                finish();
             }
         },DURACION);
     }
