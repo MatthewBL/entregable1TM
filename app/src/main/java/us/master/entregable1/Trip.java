@@ -101,6 +101,37 @@ public class Trip implements Parcelable {
         }
     }
 
+    public static void generateTripList(long seed){
+        String[] destinations = {"París", "Londres", "Nueva York", "Tokio", "Sídney", "Roma", "Berlín", "Madrid", "Pekín", "Río de Janeiro"};
+        String[] startPoints = {"Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao", "Málaga", "Oviedo", "Santander", "Zaragoza", "Murcia"};
+        String[] descriptions = {"Viaje a la ciudad del amor", "Viaje a la ciudad de la lluvia", "Viaje a la ciudad de los rascacielos", "Viaje a la ciudad del sushi", "Viaje a la ciudad de los koalas", "Viaje a la ciudad de los gladiadores", "Viaje a la ciudad de la cerveza", "Viaje a la ciudad del bocadillo de calamares", "Viaje a la ciudad de la Gran Muralla", "Viaje a la ciudad de la samba"};
+        String[] images = {"https://viajes.nationalgeographic.com.es/medio/2023/01/31/2023_7fffe24b_230131085752_800x800.jpg",
+                "https://cms.finnair.com/resource/blob/630892/68a843d4659786d6b381603c8e394e42/london-main-data.jpg",
+                "https://images.hola.com/imagenes/viajes/20200416165850/manhattan-nueva-york-maravillas-desde-mi-pantalla/0-812-351/nueva-york-manhattan-maravillas-desde-mi-pantalla-m.jpg",
+                "https://aws-tiqets-cdn.imgix.net/images/content/69e3b96cd5414970b3da6b14ec9b5ee6.jpeg",
+                "https://img.freepik.com/fotos-premium/dia-mundial-turismo-ciudad-puerto-sydney-australia_940384-210.jpg",
+                "https://www.thetrainline.com/cms/media/1473/italy-rome-sunset.jpg",
+                "https://aws-tiqets-cdn.imgix.net/images/content/da0b659013eb49cf816407c5ada7bd3c.jpg",
+                "https://www.spain.info/export/sites/segtur/.content/imagenes/reportajes/madrid/plaza-callao-gran-via-madrid-c-giuseppe-buccola-u1128812.jpg",
+                "https://i.natgeofe.com/n/2024d353-131c-4c29-a04f-5589c541e980/beijing_travel_square.jpg",
+                "https://i.natgeofe.com/n/560b293d-80b2-4449-ad6c-036a249d46f8/rio-de-janeiro-travel_square.jpg"};
+
+        Random random = new Random(seed);
+        for (int i = 0; i < 20; i++) {
+            int destinationIndex = random.nextInt(destinations.length);
+            String destination = destinations[destinationIndex];
+            String startPoint = startPoints[random.nextInt(startPoints.length)];
+            LocalDate departureDate = LocalDate.now().plusDays(random.nextInt(60));
+            LocalDate arrivalDate = departureDate.plusDays(10 + random.nextInt(10));
+            double price = 100 + (500 - 100) * random.nextDouble();
+            boolean isSelected = false;
+            String description = descriptions[destinationIndex];
+            String image = images[destinationIndex];
+
+            tripList.add(new Trip(destination, startPoint, arrivalDate, departureDate, price, isSelected, description, image));
+        }
+    }
+
     public static List<Trip> getTripList() {
         return tripList;
     }

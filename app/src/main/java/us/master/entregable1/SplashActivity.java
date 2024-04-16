@@ -15,7 +15,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Trip.generateTripList();
+        Trip.generateTripList(123456789);
 
         new Handler().postDelayed(new Runnable() {
             @Override
