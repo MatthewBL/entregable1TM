@@ -49,8 +49,10 @@ public class TripDetailsView extends AppCompatActivity {
 
         if (trip.isSelected()) {
             isSelectedImageView.setImageResource(android.R.drawable.btn_star_big_on);
+            isSelectedImageView.setTag("android.R.drawable.star_big_on");
         } else {
             isSelectedImageView.setImageResource(android.R.drawable.btn_star_big_off);
+            isSelectedImageView.setTag("android.R.drawable.star_big_off");
         }
 
         descriptionTextView.setText(trip.getDescription());
