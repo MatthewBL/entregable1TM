@@ -37,6 +37,7 @@ public class TripList extends AppCompatActivity {
     String endDate = "-";
     int minPrice = 0;
     int maxPrice = 1000;
+    Boolean columnLayout = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,9 @@ public class TripList extends AppCompatActivity {
                             minPrice = data.getIntExtra("minPrice", 0);
                             maxPrice = data.getIntExtra("maxPrice", 0);
 
+                            adapter = new TripAdapter(tripList, displaySelected, columnLayout);
                             applyFilters();
+                            recyclerView.setAdapter(adapter);
                         }
                     }
                 });
@@ -105,7 +108,9 @@ public class TripList extends AppCompatActivity {
                 } else {
                     recyclerView.setLayoutManager(new GridLayoutManager(TripList.this, 1));
                 }
-                TripAdapter adapter = new TripAdapter(tripList, displaySelected, isChecked);
+                columnLayout = isChecked;
+                adapter = new TripAdapter(tripList, displaySelected, isChecked);
+                applyFilters();
                 recyclerView.setAdapter(adapter);
             }
         });
@@ -116,6 +121,7 @@ public class TripList extends AppCompatActivity {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         }
+        columnLayout = columnasSwitch.isChecked();
     }
 
     private void applyFilters() {
